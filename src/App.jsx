@@ -285,8 +285,8 @@ Sharing personal experiences and lessons learned while exploring *[specific topi
             {/* Footer */}
             <footer className="bg-gray-800 text-white p-6 text-center text-sm">
                 <div className="container mx-auto px-4 py-2">
-                    <p>&copy; 2025 [Your Name]. All rights reserved.</p>
-                    <p>Built with ❤️ and React & Tailwind CSS. App ID: {appId}. User ID: {userId}</p>
+                    <p>&copy; 2025 Nikhil Sreekumar. All rights reserved.</p>
+                    <p>Built with ❤️ and React & Tailwind CSS</p>
                 </div>
             </footer>
         </div>
