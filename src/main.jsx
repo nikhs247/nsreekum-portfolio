@@ -1,9 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import { getFirestore } from 'firebase/firestore';
-import { getAuth} from 'firebase/auth';
-
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
@@ -17,13 +14,12 @@ import App from './App.jsx'
 // const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? initialAuthToken : null; // Fixed typo: initialAuthToken
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAs9VcnsO8oux20n5lUgQlKR3y5AASIgCQ",
-  authDomain: "nsreekum-portfolio.firebaseapp.com",
-  projectId: "nsreekum-portfolio",
-  storageBucket: "nsreekum-portfolio.firebasestorage.app",
-  messagingSenderId: "861574725924",
-  appId: "1:861574725924:web:31d63ad6387634f0eaf3b1",
-  measurementId: "G-V2CQRFZZH9"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase App
