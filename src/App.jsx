@@ -187,7 +187,7 @@ Sharing personal experiences and lessons learned while exploring *[specific topi
         }
     ];
 
-    // Firebase Auth Effect
+    // --- Authentication useEffect ---
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -195,24 +195,19 @@ Sharing personal experiences and lessons learned while exploring *[specific topi
                 setUserId(user.uid);
                 console.log("Firebase User ID:", user.uid);
             } else {
-                // User is signed out. Sign in anonymously if no token, or with token.
+                // User is signed out. Sign in anonymously if you want unauthenticated access.
                 try {
-                    if (initialAuthToken) {
-                        await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("Signed in with custom token.");
-                    } else {
-                        await signInAnonymously(auth);
-                        console.log("Signed in anonymously.");
-                    }
+                    await signInAnonymously(auth);
+                    console.log("Signed in anonymously.");
                 } catch (error) {
-                    console.error("Firebase authentication error:", error);
+                    console.error("Firebase anonymous authentication error:", error);
                 }
             }
         });
 
         // Cleanup subscription on unmount
         return () => unsubscribe();
-    }, []); // Empty dependency array means this effect runs once on mount
+    }, []);
 
     // Scroll-spy and Smooth Scrolling Effect
     useEffect(() => {
