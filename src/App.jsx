@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import {app, auth, db, analytics } from './firebaseConfig';
+
 import {signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
 
 
