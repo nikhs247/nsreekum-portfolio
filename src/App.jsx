@@ -250,7 +250,7 @@ Sharing personal experiences and lessons learned while exploring *[specific topi
     };
 
     return (
-        <div className="font-sans bg-gray-50 text-gray-800">
+        <div className="font-sans bg-gray-50 text-gray-800 min-h-screen flex flex-col">
             
 
             {/* Navigation Bar */}
@@ -266,7 +266,7 @@ Sharing personal experiences and lessons learned while exploring *[specific topi
             </nav>
 
             {/* Main Content */}
-            <main className="container mx-auto px-4 py-8 max-w-4xl">
+            <main className="container mx-auto px-4 py-8 max-w-4xl flex-grow">
                 {/* Each section now uses a ref */}
                 <div ref={sectionRefs['about-me']}>
                     <AboutMe content={aboutMeContent} />
