@@ -1,0 +1,3 @@
+Hello, I am **Nikhil Sreekumar**, a passionate researcher/developer with a keen interest in data management policies at the edge of the network. My work focuses on developing innovative solutions to improve response times and energy efficiencies via data management techniques for edge computing applications.
+
+I believe in the power of collaborations, continuous learning and knowledge sharing to drive progress and create meaningful impact. Outside of my professional pursuits, I enjoy hiking, cooking and traveling. Feel free to explore my research, projects and blog posts!
