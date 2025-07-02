@@ -5,6 +5,7 @@ import fm from 'front-matter';
 import Navbar from './components/Navbar';
 import AboutMe from './components/AboutMe';
 import Research from './components/Research';
+import PublicationModal from './components/PublicationModal';
 import Blog from './components/Blog';
 import Footer from './components/Footer';
 
@@ -25,6 +26,7 @@ const App = () => {
         'research': useRef(null),
         'blog': useRef(null),
     };
+    const [selectedPub, setSelectedPub] = useState(null);
 
     // --- Data Fetching useEffect ---
     useEffect(() => {
@@ -114,7 +116,7 @@ const App = () => {
                     <AboutMe content={aboutMeContent} />
                 </div>
                 <div ref={sectionRefs['research']}>
-                    <Research publications={publications} projects={projects} />
+                    <Research publications={publications} projects={projects} onPublicationSelect={setSelectedPub} />
                 </div>
                 <div ref={sectionRefs['blog']}>
                     <Blog posts={blogPosts} />
@@ -122,6 +124,12 @@ const App = () => {
             </main>
 
             <Footer />
+            
+            {/* Render the modal conditionally. It will only appear when selectedPub is not null. */}
+            <PublicationModal 
+                publication={selectedPub} 
+                onClose={() => setSelectedPub(null)} 
+            />
         </div>
     );
 };
