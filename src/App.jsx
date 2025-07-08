@@ -27,6 +27,8 @@ const App = () => {
         'blog': useRef(null),
     };
     const [selectedPub, setSelectedPub] = useState(null);
+    // New state to manage the publication toggle
+    const [showAllPubs, setShowAllPubs] = useState(false);
 
     // --- Data Fetching useEffect ---
     useEffect(() => {
@@ -53,7 +55,7 @@ const App = () => {
         };
 
         // Fetch all collections (no change here)
-        fetchCollection(['astra.md', 'viveka-poster.md', 'armada.md', 'haccs.md', 'vision.md'], 'publications').then(setPublications);
+        fetchCollection(['astra.md', 'viveka-poster.md', 'spaarc-kurt.md', 'l3dp.md', 'armada.md', 'haccs.md', 'armada-impl.md', 'accelerate.md', 'vision.md'], 'publications').then(setPublications);
         fetchCollection(['project1.md', 'project2.md'], 'projects').then(setProjects);
         fetchCollection(['post1.md', 'post2.md'], 'blog').then(setBlogPosts);
 
@@ -116,7 +118,13 @@ const App = () => {
                     <AboutMe content={aboutMeContent} />
                 </div>
                 <div ref={sectionRefs['research']}>
-                    <Research publications={publications} projects={projects} onPublicationSelect={setSelectedPub} />
+                    <Research 
+                        publications={publications}
+                        projects={projects}
+                        onPublicationSelect={setSelectedPub} 
+                        showAllPubs={showAllPubs}
+                        setShowAllPubs={setShowAllPubs}
+                    />
                 </div>
                 <div ref={sectionRefs['blog']}>
                     <Blog posts={blogPosts} />
