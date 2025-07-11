@@ -7,6 +7,7 @@ import AboutMe from './components/AboutMe';
 import Research from './components/Research';
 import PublicationModal from './components/PublicationModal';
 import Blog from './components/Blog';
+import BlogModal from './components/BlogModal';
 import Footer from './components/Footer';
 
 // Firebase imports remain the same
@@ -27,6 +28,8 @@ const App = () => {
         'blog': useRef(null),
     };
     const [selectedPub, setSelectedPub] = useState(null);
+    const [selectedPost, setSelectedPost] = useState(null);
+
     // New state to manage the publication toggle
     const [showAllPubs, setShowAllPubs] = useState(false);
 
@@ -46,10 +49,12 @@ const App = () => {
                 const { attributes, body } = fm(file); // Use fm() and get attributes/body
                 const data = attributes; // Keep your variable name 'data' if you wish
 
+                data.fullContent = body
+
                 // Assign body content to the correct key
                 if (directory === 'publications') data.abstract = body;
                 if (directory === 'projects') data.description = body;
-                if (directory === 'blog') data.snippet = body;
+                // if (directory === 'blog') data.snippet = body;
                 return data;
             });
         };
@@ -57,7 +62,7 @@ const App = () => {
         // Fetch all collections (no change here)
         fetchCollection(['astra.md', 'viveka-poster.md', 'spaarc-kurt.md', 'l3dp.md', 'armada.md', 'haccs.md', 'armada-impl.md', 'accelerate.md', 'vision.md'], 'publications').then(setPublications);
         fetchCollection(['project1.md', 'project2.md'], 'projects').then(setProjects);
-        fetchCollection(['post1.md', 'post2.md'], 'blog').then(setBlogPosts);
+        fetchCollection(['rust.md', 'post2.md'], 'blog').then(setBlogPosts);
 
     }, []);
 
@@ -127,7 +132,10 @@ const App = () => {
                     />
                 </div>
                 <div ref={sectionRefs['blog']}>
-                    <Blog posts={blogPosts} />
+                    <Blog 
+                        posts={blogPosts} 
+                        onPostSelect={setSelectedPost} // <-- Pass the setter function
+                    />
                 </div>
             </main>
 
@@ -137,6 +145,10 @@ const App = () => {
             <PublicationModal 
                 publication={selectedPub} 
                 onClose={() => setSelectedPub(null)} 
+            />
+            <BlogModal 
+                post={selectedPost} 
+                onClose={() => setSelectedPost(null)} 
             />
         </div>
     );
