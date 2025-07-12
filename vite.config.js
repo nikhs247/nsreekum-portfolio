@@ -1,26 +1,12 @@
+// vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import typography from '@tailwindcss/typography'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    react()
-    , tailwindcss({
-          config: {
-            content: [
-              "./index.html",
-              "./src/**/*.{js,ts,jsx,tsx}",
-            ],
-            theme: {
-              extend: {},
-            },
-            plugins: [
-              typography,
-            ],
-          }
-        }
-    ),
+    react(),
+    tailwindcss(), // No need to pass any config here
   ],
 })

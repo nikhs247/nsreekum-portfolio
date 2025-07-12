@@ -3,8 +3,8 @@ title: "Rust programming - Evolving post"
 date: "July 11, 2025"
 snippet: "Learning Rust programming from basic to application in distributed systems"
 ---
-# Variables, Data types and functions
-- Declare variables using the `let` keyword
+### Variables, Data types and functions
+- Declare variables using the **let** keyword
 - Immutable variables: Value cannot be change once assigned
 ```
     let immutable_var = 5;
@@ -16,16 +16,16 @@ snippet: "Learning Rust programming from basic to application in distributed sys
     mutable_var = 10;
 ```
 
-- Data types: i32 - 32-bit integer, f64 - 64-bit floating point number, boo, char
+- Data types: i32 - 32-bit integer, f64 - 64-bit floating point number, bool, char
 
-- Functions: Defined with `fn` keyword
+- Functions: Defined with **fn** keyword
 ```
     fn add_nums(num1: i32, num2: i32) {
         num1 + num2 // returns the sum when no semicolon is used
     }
 ```
 
-# Ownership
+### Ownership
 
 There are three rules for ownership
 - Each value has a single owner
@@ -58,4 +58,4 @@ How to allow mutability of the variable while ensuring exclusivity ?
     }
 ```
 - Borrow the mutability of the variable into the function and modify.
-- If two threads call the above function, the compiler errors as only one thread is allowed to modify the variable at a time. `Mutex` and `Arc` could be utilized for variable sharing, which will be discussed later.
+- If two threads call the above function, the compiler errors as only one thread is allowed to modify the variable at a time. **Mutex** and **Arc** could be utilized for variable sharing, which will be discussed later.
