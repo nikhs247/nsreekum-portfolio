@@ -62,7 +62,7 @@ const App = () => {
         // Fetch all collections (no change here)
         fetchCollection(['astra.md', 'viveka-poster.md', 'spaarc-kurt.md', 'l3dp.md', 'armada.md', 'haccs.md', 'armada-impl.md', 'accelerate.md', 'vision.md'], 'publications').then(setPublications);
         fetchCollection(['project1.md', 'project2.md'], 'projects').then(setProjects);
-        fetchCollection(['rust.md', 'post2.md'], 'blog').then(setBlogPosts);
+        fetchCollection(['rust.md'], 'blog').then(setBlogPosts);
 
     }, []);
 
