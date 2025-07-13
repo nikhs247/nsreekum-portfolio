@@ -1,2 +1,18 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+/* Target inline code specifically within prose blocks */
+.prose code {
+  color: #c9d1d9; /* A light gray for text, good on dark backgrounds */
+  background-color: #161b22; /* A dark background color */
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  border-radius: 6px;
+}
+
+/* This is the key part: remove the backquote pseudo-elements */
+.prose code::before,
+.prose code::after {
+  content: '';
+}
