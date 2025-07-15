@@ -240,3 +240,27 @@ To ensure the completion of child threads, the main thread could wait for them. 
         handle.join().unwrap();
     }
 ```
+**Message Passing with Channels**
+Threads could communicate with each other via shared memory or message passing. Using message passing avoids data races and deadlocks. In Rust we could use `mpsc` (multipe producer, single consumer) channels to implement message passing.
+
+Each channel has two endpoints: a transmitter (`tx`) and a receiver (`rx`). Thre transmitter could be cloned across multiple threads, but not the receiver.
+
+```rust
+    use std::sync::mpsc;
+    use std::thread;
+
+    fn main() {
+        // Create a new channel
+        let (tx, rx) = mpsc::channel();
+
+        // Spawn a thread and transmit messages
+        thread::spwan(move || {
+            let message = String::from("Hello from transmitting thread");
+            tx.send(message).unwrap();
+        })
+
+        let received_message = rx.recv().unwrap();
+        println1("{} received from channel", received_message);
+    }
+```
+
