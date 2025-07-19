@@ -241,7 +241,7 @@ To ensure the completion of child threads, the main thread could wait for them. 
     }
 ```
 **Message Passing with Channels**
-Threads could communicate with each other via shared memory or message passing. Using message passing avoids data races and deadlocks. In Rust we could use `mpsc` (multipe producer, single consumer) channels to implement message passing.
+Threads could communicate with each other via shared memory or message passing. Using message passing avoids data races and deadlocks. In Rust we could use `mpsc` (multiple producer, single consumer) channels to implement message passing.
 
 Each channel has two endpoints: a transmitter (`tx`) and a receiver (`rx`). Thre transmitter could be cloned across multiple threads, but not the receiver.
 
@@ -263,4 +263,67 @@ Each channel has two endpoints: a transmitter (`tx`) and a receiver (`rx`). Thre
         println1("{} received from channel", received_message);
     }
 ```
+If the main thread exits before the child thread, the data shared with the child thread is dropped, leading to a panic. The `move` forces the closure to take ownership of the variables it shares with the main thread.
 
+```rust
+    use std::thread;
+
+    let data = vec![1, 2, 3];
+    thread::spawn(|| {
+        println!("Vector data: {:?}", data);
+    });
+```
+In the above example, if main thread exits before child, the data vector accessibility is lost, resulting in the child failing. Use `move` in conjunction with `join` to avoid this issue.
+
+```rust
+    use std::thread;
+
+    let data = vec![1, 2, 3];
+    let handle = thread::spawn(move || {
+        println!("Vector data: {:?}", data);
+    });
+
+    handle.join().unwrap();
+```
+***Exclusive Access and Ownership sharing***
+
+`Mutex` is a smart pointer that ensures only one thread can access the data it holds at any given time. Before a thread can use the data, it must acquire a lock on the mutex. All other threads must wait for the lock to be released before they can acquire it. This prevents data races by enforcing exclusive access to the data.
+
+Since Rust only allows single ownership of a variable, we need a mechanism to share ownership of a variable across multiple threads. `Arc` (Atomically Referenced Counter) is a smart pointer that lets multiple threads own a variable. It keeps track of the number of references to the variable and ensures that the variable is dropped when the last reference is removed.
+
+The pattern for sharing state in Rust is `Arc<Mutex<T>>`
+    - `Arc` lets all the threads get a reference to the `Mutex`
+    - `Mutex` ensures that only one thread at a time can access the data `T` inside.
+
+```rust
+    use std::sync::{Arc, Mutex};
+    use std::thread;
+
+    fn main() {
+        // Create a counter inside an Arc<Mutex>
+        let counter = Arc::new(Mutex::new(0));
+        let mut handles = vec![];
+
+        for _ in 0..10 {
+            // Clone the Arc to share ownership to the new thread
+            let counter_clone = Arc::clone(&counter);
+
+            let handle = thread::spawn(move || {
+                // Lock the mutex to get access to the data
+                let mut num = counter_clone.lock().unwrap();
+                *num += 1;
+            }); // The lock is automatically released here
+            handles.push(handle);
+        }
+
+        // Wait for all the threads to finish
+        for handle in handles {
+            handle.join().unwrap();
+        }
+
+        println!("Result: {}", *counter.lock().unwrap());
+    }
+```
+Unlike other languages, a shared variable is guarded by `Mutex`. Hence, it is necessary for the main thread to call `lock()` to access it even if all thread have joined. This is a safety feature in Rust.
+
+***Asynchronous programming***
