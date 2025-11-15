@@ -40,21 +40,6 @@ const Research = ({ publications, projects, onPublicationSelect, showAllPubs,
                 </button>
                 </div>
             )}
-
-            {/* Projects Subsection */}
-            {/* <h2 className="text-3xl font-semibold text-blue-600 mb-4 mt-8">Projects</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {projects.map((proj, index) => (
-                    <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <h3 className="text-xl font-semibold text-blue-700 mb-2">{proj.title}</h3>
-                        <p className="text-gray-600 text-sm mb-2">Technologies: {proj.technologies}</p>
-                        <div className="prose prose-sm text-gray-700 mb-3">
-                            <ReactMarkdown>{proj.description}</ReactMarkdown>
-                        </div>
-                        <a href={proj.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline text-sm font-medium">{proj.linkText} &rarr;</a>
-                    </div>
-                ))}
-            </div> */}
         </section>
     );
 };
