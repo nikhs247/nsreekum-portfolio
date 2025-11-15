@@ -5,7 +5,7 @@ export const education = [
     institution: 'University of Minnesota',
     degree: 'Ph.D. in Computer Science',
     years: '2019 - 2025',
-    details: 'Thesis on data placement strategies for low-latency edge applications.',
+    details: 'Thesis on application aware data management in edge computing.',
   },
   {
     institution: 'BITS Pilani',
