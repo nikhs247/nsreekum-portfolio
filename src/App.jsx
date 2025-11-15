@@ -4,6 +4,7 @@ import fm from 'front-matter';
 // Import your new components
 import Navbar from './components/Navbar';
 import AboutMe from './components/AboutMe';
+import Experience from './components/Experience';
 import Research from './components/Research';
 import PublicationModal from './components/PublicationModal';
 // import Blog from './components/Blog';
@@ -17,6 +18,7 @@ import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 const App = () => {
     // State to hold content fetched from markdown files
     const [aboutMeContent, setAboutMeContent] = useState('');
+    // const [experienceContent, setExperienceContent] = useState('');
     const [publications, setPublications] = useState([]);
     const [projects, setProjects] = useState([]);
     // const [blogPosts, setBlogPosts] = useState([]);
@@ -24,6 +26,7 @@ const App = () => {
     const [userId, setUserId] = useState(null);
     const sectionRefs = {
         'about-me': useRef(null),
+        'experience': useRef(null),
         'research': useRef(null),
         // 'blog': useRef(null),
     };
@@ -39,6 +42,11 @@ const App = () => {
         fetch('/content/about-me.md')
             .then(res => res.text())
             .then(text => setAboutMeContent(text));
+
+        // Fetch Experience content
+        // fetch('/content/experience.md')
+        //     .then(res => res.text())
+        //     .then(text => setExperienceContent(text));
 
         // Helper function to fetch and parse a collection of markdown files
         const fetchCollection = async (fileNames, directory) => {
@@ -121,6 +129,12 @@ const App = () => {
             <main className="container mx-auto px-4 py-8 max-w-4xl flex-grow">
                 <div ref={sectionRefs['about-me']}>
                     <AboutMe content={aboutMeContent} />
+                </div>
+                {/* <div ref={sectionRefs['experience']}>
+                    <Experience content={experienceContent} />
+                </div> */}
+                <div ref={sectionRefs['experience']}>
+                    <Experience />
                 </div>
                 <div ref={sectionRefs['research']}>
                     <Research 

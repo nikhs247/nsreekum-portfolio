@@ -24,6 +24,7 @@ const Navbar = ({ scrollToSection }) => {
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-4">
           <a href="#about-me" onClick={() => scrollToSection('about-me')} className="nav-link text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200">About Me</a>
+          <a href="#experience" onClick={() => scrollToSection('experience')} className="nav-link text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200">Experience</a>
           <a href="#research" onClick={() => scrollToSection('research')} className="nav-link text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200">Research</a>
           {/* <a href="#blog" onClick={() => scrollToSection('blog')} className="nav-link text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200">Blog</a> */}
         </div>
@@ -41,6 +42,7 @@ const Navbar = ({ scrollToSection }) => {
       {/* Mobile Menu (Dropdown) */}
       {isMenuOpen && (
         <div className="md:hidden mt-4">
+          
           <a 
             href="#about-me" 
             onClick={() => {
@@ -51,6 +53,18 @@ const Navbar = ({ scrollToSection }) => {
           >
             About Me
           </a>
+          
+          <a 
+            href="#experience" 
+            onClick={() => {
+              scrollToSection('experience');
+              setIsMenuOpen(false);
+            }} 
+            className="block text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200"
+          >
+            Experience
+          </a>
+          
           <a 
             href="#research" 
             onClick={() => {
