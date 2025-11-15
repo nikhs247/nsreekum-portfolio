@@ -4,13 +4,14 @@ export const education = [
   {
     institution: 'University of Minnesota',
     degree: 'Ph.D. in Computer Science',
-    years: '2019 - 2025',
-    details: 'Thesis on application aware data management in edge computing.',
+    years: 'Nov 2025',
+    details: 'Thesis: Application-aware Data Management in Edge Computing', // <-- Added
   },
   {
     institution: 'BITS Pilani',
     degree: 'M.E. in Computer Science',
-    years: '2014 - 2016',
+    years: 'May 2016',
+    details: 'Thesis: A New Hybrid Data Structure for Multi-Node and Multi-Core Environment', // <-- Added
   },
   {
     institution: 'TKM College of Engineering',
@@ -32,10 +33,20 @@ export const work = [
   {
     company: 'University of Minnesota',
     title: 'Graduate Research Assistant',
-    years: '2019 - 2025',
+    years: 'Sept 2019 - Nov 2025',
     details: [
       'Conducted research on edge computing, distributed systems, and signal processing.',
       'Advised by Dr. Abhishek Chandra and Dr. Jon Weissman.',
+    ],
+  },
+  {
+    company: 'MathWorks',
+    title: 'Software Engineer',
+    years: 'July 2016 – June 2019',
+    details: [
+      'Designed and developed a traceability feature in C++ for HDL Coder.',
+      'Architected extensions to the in-house Intermediate Representation (IR) for struct support.',
+      'Led a project to introduce floating-point support for MATLAB Function Blocks in MATLAB Coder.',
     ],
   },
 ];

@@ -1,9 +1,7 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import { projects } from '../data/projects.js';
 
-const Research = ({ publications, projects, onPublicationSelect, showAllPubs,
-  setShowAllPubs, }) => {
-    // Determine which publications to display based on the state
+const Research = ({ publications, onPublicationSelect, showAllPubs, setShowAllPubs }) => {
     const displayedPubs = showAllPubs ? publications : publications.slice(0, 6);
 
     return (
@@ -40,6 +38,23 @@ const Research = ({ publications, projects, onPublicationSelect, showAllPubs,
                 </button>
                 </div>
             )}
+
+            {/* Projects Subsection */}
+            <h2 className="text-3xl font-semibold text-blue-600 mb-4 mt-8">
+                Relevant Projects
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {projects.map((proj, index) => (
+                    <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                        <p className="text-sm text-gray-500">{proj.years}</p>
+                        <h3 className="text-xl font-semibold text-blue-700 mb-2">{proj.title}</h3>
+                        <p className="text-gray-700 mb-3 flex-grow">{proj.description}</p>
+                        <p className="text-blue-500 text-sm font-medium self-start mt-2">
+                            <strong>Technologies:</strong> {proj.tech}
+                        </p>
+                    </div>
+                ))}
+            </div>
         </section>
     );
 };

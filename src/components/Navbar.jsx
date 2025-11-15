@@ -18,15 +18,15 @@ const Navbar = ({ scrollToSection }) => {
           }} 
           className="text-white text-2xl font-bold rounded-lg p-2 hover:bg-blue-700 transition-colors duration-200"
         >
-          My Website
+          Nikhil Sreekumar
         </a>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-4">
           <a href="#about-me" onClick={() => scrollToSection('about-me')} className="nav-link text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200">About Me</a>
           <a href="#experience" onClick={() => scrollToSection('experience')} className="nav-link text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200">Experience</a>
+          <a href="#skills" onClick={() => scrollToSection('skills')} className="nav-link text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200">Skills</a>
           <a href="#research" onClick={() => scrollToSection('research')} className="nav-link text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200">Research</a>
-          {/* <a href="#blog" onClick={() => scrollToSection('blog')} className="nav-link text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200">Blog</a> */}
         </div>
 
         {/* Hamburger Button for Mobile */}
@@ -63,6 +63,17 @@ const Navbar = ({ scrollToSection }) => {
             className="block text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200"
           >
             Experience
+          </a>
+
+          <a 
+            href="#skills" 
+            onClick={() => {
+              scrollToSection('skills');
+              setIsMenuOpen(false);
+            }} 
+            className="block text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200"
+          >
+            Skills
           </a>
           
           <a 

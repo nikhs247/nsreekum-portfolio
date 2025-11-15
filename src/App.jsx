@@ -5,10 +5,9 @@ import fm from 'front-matter';
 import Navbar from './components/Navbar';
 import AboutMe from './components/AboutMe';
 import Experience from './components/Experience';
+import Skills from './components/Skills';
 import Research from './components/Research';
 import PublicationModal from './components/PublicationModal';
-// import Blog from './components/Blog';
-// import BlogModal from './components/BlogModal';
 import Footer from './components/Footer';
 
 // Firebase imports remain the same
@@ -17,36 +16,22 @@ import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 
 const App = () => {
     // State to hold content fetched from markdown files
-    const [aboutMeContent, setAboutMeContent] = useState('');
-    // const [experienceContent, setExperienceContent] = useState('');
     const [publications, setPublications] = useState([]);
-    const [projects, setProjects] = useState([]);
-    // const [blogPosts, setBlogPosts] = useState([]);
 
     const [userId, setUserId] = useState(null);
     const sectionRefs = {
         'about-me': useRef(null),
         'experience': useRef(null),
+        'skills': useRef(null),
         'research': useRef(null),
-        // 'blog': useRef(null),
     };
     const [selectedPub, setSelectedPub] = useState(null);
-    const [selectedPost, setSelectedPost] = useState(null);
 
     // New state to manage the publication toggle
     const [showAllPubs, setShowAllPubs] = useState(false);
 
     // --- Data Fetching useEffect ---
     useEffect(() => {
-        // Fetch About Me content
-        fetch('/content/about-me.md')
-            .then(res => res.text())
-            .then(text => setAboutMeContent(text));
-
-        // Fetch Experience content
-        // fetch('/content/experience.md')
-        //     .then(res => res.text())
-        //     .then(text => setExperienceContent(text));
 
         // Helper function to fetch and parse a collection of markdown files
         const fetchCollection = async (fileNames, directory) => {
@@ -61,17 +46,12 @@ const App = () => {
 
                 // Assign body content to the correct key
                 if (directory === 'publications') data.abstract = body;
-                if (directory === 'projects') data.description = body;
-                // if (directory === 'blog') data.snippet = body;
                 return data;
             });
         };
 
         // Fetch all collections (no change here)
         fetchCollection(['astra.md', 'viveka-poster.md', 'spaarc-kurt.md', 'l3dp.md', 'armada.md', 'haccs.md', 'armada-impl.md', 'accelerate.md', 'vision.md'], 'publications').then(setPublications);
-        fetchCollection(['project1.md', 'project2.md'], 'projects').then(setProjects);
-        // fetchCollection(['rust.md'], 'blog').then(setBlogPosts);
-
     }, []);
 
     // --- Authentication useEffect ---
@@ -127,30 +107,27 @@ const App = () => {
             <Navbar scrollToSection={scrollToSection} />
             
             <main className="container mx-auto px-4 py-8 max-w-4xl flex-grow">
+                
                 <div ref={sectionRefs['about-me']}>
-                    <AboutMe content={aboutMeContent} />
+                    <AboutMe /> {/* <-- No more 'content' prop */}
                 </div>
-                {/* <div ref={sectionRefs['experience']}>
-                    <Experience content={experienceContent} />
-                </div> */}
+                
                 <div ref={sectionRefs['experience']}>
                     <Experience />
                 </div>
+
+                <div ref={sectionRefs['skills']}>
+                    <Skills />
+                </div>
+                
                 <div ref={sectionRefs['research']}>
                     <Research 
                         publications={publications}
-                        projects={projects}
                         onPublicationSelect={setSelectedPub} 
                         showAllPubs={showAllPubs}
                         setShowAllPubs={setShowAllPubs}
                     />
                 </div>
-                {/* <div ref={sectionRefs['blog']}>
-                    <Blog 
-                        posts={blogPosts} 
-                        onPostSelect={setSelectedPost} // <-- Pass the setter function
-                    />
-                </div> */}
             </main>
 
             <Footer />
