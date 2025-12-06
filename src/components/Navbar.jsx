@@ -86,16 +86,6 @@ const Navbar = ({ scrollToSection }) => {
           >
             Research
           </a>
-          {/* <a 
-            href="#blog" 
-            onClick={() => {
-              scrollToSection('blog');
-              setIsMenuOpen(false);
-            }} 
-            className="block text-white hover:bg-blue-600 px-4 py-2 rounded-lg transition-colors duration-200"
-          >
-            Blog
-          </a> */}
         </div>
       )}
     </nav>
